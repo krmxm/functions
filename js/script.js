@@ -153,7 +153,7 @@ console.log(getCoupeNumber(1));
 
 function getTimeFromMinutes(minutes) {
 
-    if ( typeof(minutes) == 'number' || !Number.isInteger(minutes) || minutes < 0) {
+    if ( typeof(minutes) !== 'number' || !Number.isInteger(minutes) || minutes < 0) {
         return "Ошибка, проверьте данные";
     }
 
@@ -174,7 +174,7 @@ function getTimeFromMinutes(minutes) {
 
     if ( min === 1 ) {
         minStr = `${min} минута`;
-    } else if ( min < 5) {
+    } else if ( min < 5 && min > 0) {
         minStr = `${min} минуты`;
     } else {
         minStr = `${min} минут`;
@@ -184,7 +184,7 @@ function getTimeFromMinutes(minutes) {
     return `Это ${hoursStr} и ${minStr}`;
 }
 
-console.log(getTimeFromMinutes(-150));
+console.log(getTimeFromMinutes(150));
 
 // Напишите функцию, которая принимает в себя 4 числа и возвращает самое большее из них. Если один
 // из аргументов не является числом или их меньше 4 - возвращается 0. Дробные числа разрешены.
@@ -203,3 +203,72 @@ function findMaxNumber(num1, num2, num3, num4) {
 }
 
 console.log(findMaxNumber(1, 2, 3, 4));
+
+// Задача с собеседований на числа Фибоначчи
+
+// Это одна из классических задач в программировании на самых разных языках.
+// Скорее всего вы слышали про числа Фибоначчи, где первые два числа равны 
+// 0 и 1, а каждое последующее число равно сумме двух предыдущих чисел. И
+// на собеседованиях часто дают задачи, связанные с этими числами.
+
+// Создайте функцию, которая будет принимать в себя один аргумент-целое
+// положительное число. Она должна возвращать строку, в которой будут через
+// пробел выведены числа Фибоначчи. Причем, их количество должно быть равно переданному аргументу.
+
+// Если переданный аргумент не число - вернуть пустую строку. Решать без применения рекурсии.
+
+// Пример:
+
+// fib(4) => "0 1 1 2"
+
+// fib(7) => "0 1 1 2 3 5 8"
+
+// fib('7') => ""
+
+// fib(1) => "0"
+
+// fib(0) => ""
+
+function fib(num) {
+    if (typeof(num) !== 'number' || !Number.isInteger(num) || num < 0) {
+        return '';
+    }
+
+    let strFib = [];
+
+    for (let i = 0; i < num; i++) {
+        if ( i === 0 || i === 1) {
+            strFib.push(i);
+        } else {
+            let formula = Number(strFib.slice(-2, -1).join()) + Number(strFib.slice(-1).join());
+            strFib.push(formula);
+        }
+    }
+
+    return strFib.join(' ');
+}
+
+console.log(fib(7));
+
+// Ещё один способ
+
+function fib(count) {
+    if (typeof (count) !== 'number' || count <= 0 || count % 1 !== 0) {
+        return '';
+    }
+    const arrNumbers = [0];
+    for (let i = 1; i < count; i++) {
+        if (i === 1){
+            arrNumbers.push(1);
+        } else {
+            arrNumbers.push(arrNumbers[i-1] + arrNumbers[i-2]);
+        }            
+    }
+    return arrNumbers.join(' ');
+}
+
+console.log(fib(6));
+
+const arrNumbers = [4, 5, 7, 7];
+
+console.log(arrNumbers[0]);
