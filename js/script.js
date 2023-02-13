@@ -88,22 +88,118 @@ console.log(returnNeighboringNumbers(5));
 
 // Вызов функции getMathResult(20, -5) даст ответ 20
 
-function getMathResult(number, times) {
-    if (typeof(times) !== 'number' ||  times <= 0) {
-        return number;
+// function getMathResult(number, times) {
+//     if (typeof(times) !== 'number' ||  times <= 0 ||) {
+//         return number;
+//     }
+
+//     let str = '';
+
+//     for (let i = 1; i <= times; i++) {
+//         if (i == times) {
+//             str += `${number * i}`;
+//         } else {
+//             str += `${number * i}---`;
+//         }
+//     }
+
+//     return str;
+// }
+
+// console.log(getMathResult(10, 5));
+
+// tasks
+
+// 1) Создайте функцию, которая будет вычислять объем и площадь полной поверхности куба
+// (тоже базовая математика, иногда используется в создании анимаций). Эта функция принимает в
+// себя целое число со значением длины ребра куба. Ответ выведите в формате строки, который изображен в примерах.
+
+// Если в функцию попал неправильный аргумент или вычислить значения невозможно - вернуть строку
+// "При вычислении произошла ошибка"
+
+function calculateVolumeAndArea(num) {
+    if (typeof(num) !== 'number' || num <= 0 || !Number.isInteger(num)) {
+        return `При вычислении произошла ошибка`;
+    } else {
+        const v = num * num * num;
+        const s = num * num * 6;
+        return `Объем куба: ${v}, площадь всей поверхности: ${s}`;
     }
-
-    let str = '';
-
-    for (let i = 1; i <= times; i++) {
-        if (i === times) {
-            str += `${number * i}`;
-        } else {
-            str += `${number * i}---`;
-        }
-    }
-
-    return str;
 }
 
-console.log(getMathResult(10, 5));
+console.log(calculateVolumeAndArea(12.2));
+
+// 2) Функция принимает только целое число от 1 до 36.
+// Если переданный аргумент не число, отрицательное или дробное - возвращается сообщение:
+// "Ошибка. Проверьте правильность введенного номера места"
+// Если число 0 или больше 36, то сообщение: "Таких мест в вагоне не существует"
+
+function getCoupeNumber(number) {
+    if (!Number.isInteger(number) || number < 0 || typeof(number) == 'number') {
+        return "Ошибка. Проверьте правильность введенного номера места";
+    } else if 
+           ( number == 0 || number > 36) {
+            return "Таких мест в вагоне не существует";
+        } else {
+            return Math.ceil(number / 4);
+        }
+}
+
+console.log(getCoupeNumber(1));
+
+// 3) Создайте функцию, которая принимает в себя целое число минут и возвращает время в нужном
+// формате строки. (Смотри пример). Обратите внимание на окончание слова "час" - оно меняется в
+// зависимости от цифры. Если вместо аргумента приходит не число, дробное или отрицательное число - функция возвращает строку "Ошибка, проверьте данные"
+
+function getTimeFromMinutes(minutes) {
+
+    if ( typeof(minutes) == 'number' || !Number.isInteger(minutes) || minutes < 0) {
+        return "Ошибка, проверьте данные";
+    }
+
+    const hours = Math.floor(minutes / 60);
+    const min = minutes % 60;
+    let hoursStr = '';
+    let minStr = '';
+
+
+    if ( hours == 1 ) {
+        hoursStr = `${hours} час`;
+    } else if ( hours < 5 && hours > 0) {
+        hoursStr = `${hours} часа`;
+    } else {
+        hoursStr = `${hours} часов`;
+
+    }
+
+    if ( min === 1 ) {
+        minStr = `${min} минута`;
+    } else if ( min < 5) {
+        minStr = `${min} минуты`;
+    } else {
+        minStr = `${min} минут`;
+
+    }
+
+    return `Это ${hoursStr} и ${minStr}`;
+}
+
+console.log(getTimeFromMinutes(-150));
+
+// Напишите функцию, которая принимает в себя 4 числа и возвращает самое большее из них. Если один
+// из аргументов не является числом или их меньше 4 - возвращается 0. Дробные числа разрешены.
+
+function findMaxNumber(num1, num2, num3, num4) {
+
+    if (findMaxNumber.length < 4 ||
+        typeof(num1) !== 'number' ||
+        typeof(num2) !== 'number' ||
+        typeof(num3) !== 'number' ||
+        typeof(num4) !== 'number') {
+            return 0;
+        } else {
+            return Math.max(num1, num2, num3, num4);
+        }
+}
+
+console.log(findMaxNumber(1, 2, 3, 4));
